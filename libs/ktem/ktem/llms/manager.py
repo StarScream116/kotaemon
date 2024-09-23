@@ -54,9 +54,23 @@ class LLMManager:
                     self._default = item.name
 
     def load_vendors(self):
-        from kotaemon.llms import AzureChatOpenAI, ChatOpenAI, LlamaCppChat
+        from kotaemon.llms import (
+            AzureChatOpenAI,
+            ChatOpenAI,
+            LCAnthropicChat,
+            LCCohereChat,
+            LCGeminiChat,
+            LlamaCppChat,
+        )
 
-        self._vendors = [ChatOpenAI, AzureChatOpenAI, LlamaCppChat]
+        self._vendors = [
+            ChatOpenAI,
+            AzureChatOpenAI,
+            LCAnthropicChat,
+            LCGeminiChat,
+            LCCohereChat,
+            LlamaCppChat,
+        ]
 
         for extra_vendor in getattr(flowsettings, "KH_LLM_EXTRA_VENDORS", []):
             self._vendors.append(import_dotted_string(extra_vendor, safe=False))
